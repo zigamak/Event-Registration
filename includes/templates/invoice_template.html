@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Event Registration</title>
+    <style>
+        /* Basic Reset & Body Styles */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light background for the overall page */
+        }
+
+        /* Invoice Container */
+        .invoice-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            background: #fff;
+            border-radius: 8px; /* Slightly rounded corners for the invoice */
+            overflow: hidden; /* Ensures shadow and border-radius apply correctly */
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .header img {
+            max-width: 180px; /* Adjusted logo size for invoice */
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            color: #171248; /* Theme color */
+            font-size: 32px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Details Grid (Invoice From/To, Invoice Details/Status) */
+        .details-grid {
+            display: table; /* Use table display for robust layout in emails/PDFs */
+            width: 100%;
+            margin-bottom: 30px;
+            border-collapse: collapse;
+        }
+        .details-row {
+            display: table-row;
+        }
+        .details-cell {
+            display: table-cell;
+            padding: 15px;
+            vertical-align: top;
+            width: 50%; /* Each cell takes half width */
+        }
+        .details-cell h3 {
+            color: #171248; /* Theme color */
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #f2f2f2; /* Subtle underline for headings */
+            padding-bottom: 5px;
+        }
+        .details-cell p {
+            margin: 5px 0;
+            font-size: 15px;
+            color: #555;
+        }
+        .details-cell p strong {
+            color: #333;
+        }
+
+        /* Item Table */
+        .item-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .item-table th, .item-table td {
+            border: 1px solid #eee;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 15px;
+        }
+        .item-table th {
+            background-color: #f8f8f8;
+            color: #171248; /* Theme color for table headers */
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .item-table .total-row td {
+            font-weight: bold;
+            color: #171248; /* Theme color for total */
+            background-color: #f2f2f2;
+            font-size: 16px;
+        }
+        .item-table .total-row td:last-child {
+            text-align: right; /* Align total amount to the right */
+        }
+
+        /* QR Code Section */
+        .qr-code-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #eee; /* Dotted line separator */
+        }
+        .qr-code-section p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .qr-code-section img {
+            width: 150px; /* Standard size for QR code */
+            height: 150px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #fff;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow for QR code */
+        }
+        .qr-code-section .reference-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #171248; /* Theme color for reference text */
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 13px;
+            color: #777;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .footer a {
+            color: #171248; /* Theme color for footer links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="https://eventmanagerscommunity.com/wp-content/uploads/2025/07/cropped-b26a0aba-d5ba-f3c5-fb46-995ad1441349-1.png" alt="Event Managers Community Logo">
+            <h1>Payment Invoice</h1>
+        </div>
+
+        <!-- Invoice Details and Recipient Information -->
+        <div class="details-grid">
+            <div class="details-row">
+                <div class="details-cell">
+                    <h3>Invoice From:</h3>
+                    <p>
+                        <strong>{{from_name}}</strong><br>
+                        {{from_address}}<br>
+                        Phone: {{from_phone}}<br>
+                        Email: {{from_email}}
+                    </p>
+                </div>
+                <div class="details-cell">
+                    <h3>Invoice To:</h3>
+                    <p>
+                        <strong>{{name}}</strong><br>
+                        {{email}}<br>
+                        Phone: {{phone}}
+                    </p>
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="details-cell">
+                    <h3>Invoice Details:</h3>
+                    <p>
+                        <strong>Invoice No:</strong> INV-{{reference}}<br>
+                        <strong>Invoice Date:</strong> {{invoice_date}}<br>
+                        <strong>Due Date:</strong> {{invoice_due_date}}
+                    </p>
+                </div>
+             <div class="details-cell">
+    <h3>Payment Status:</h3>
+    <p style="color: {{payment_status_color}}; font-weight: bold; font-size: 16px;">{{payment_status}}</p>
+    <p><strong>Reference:</strong> {{reference}}</p>
+</div>
+            </div>
+        </div>
+
+        <!-- Itemized Table -->
+        <table class="item-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (NGN)</th>
+                    <th>Total (NGN)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Event Registration Fee</td>
+                    <td>{{category}}</td>
+                    <td>1</td>
+                    <td>{{amount}}</td>
+                    <td>{{amount}}</td>
+                </tr>
+                <!-- Add more rows here if you have other items -->
+            </tbody>
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="4" style="text-align: right;">Grand Total:</td>
+                    <td>NGN {{amount}}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- QR Code Section -->
+        <div class="qr-code-section">
+            <p>Scan this QR code with your payment reference for quick verification or future inquiries:</p>
+            <img src="{{qr_code_image}}" alt="QR Code for Reference {{reference}}">
+            <p class="reference-text">Reference: {{reference}}</p>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>Thank you for your registration!</p>
+            <p>For any questions, please contact us at <a href="mailto:{{from_email}}">{{from_email}}</a></p>
+            <p>&copy; 2025 {{from_name}}. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

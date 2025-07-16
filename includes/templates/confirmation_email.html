@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Confirmation</title>
+    <style>
+        /* Basic Reset & Body Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #171248;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden; /* Ensures border-radius applies nicely */
+        }
+
+        /* Header */
+        .header {
+            background-color: #171248; /* Theme color */
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 180px;
+            height: auto;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 30px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .content h1 {
+            color: #171248;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .content p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        /* Details Section */
+        .details-box {
+            background-color: #f9f9f9;
+            border-left: 5px solid #171248; /* Accent border */
+            padding: 20px 25px;
+            border-radius: 5px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .details-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .details-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eeeeee;
+            font-size: 15px;
+            color: #555555;
+        }
+        .details-box li:last-child {
+            border-bottom: none;
+        }
+        .details-box .label {
+            font-weight: bold;
+            color: #171248; /* Theme color for labels */
+            display: inline-block;
+            width: 150px; /* Align labels */
+        }
+        .details-box .value {
+            display: inline-block;
+            word-break: break-all; /* For long values like email/reference */
+        }
+
+
+        /* Footer */
+        .footer {
+            background-color: #171248; /* Theme color */
+            color: #ffffff;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        .footer p {
+            margin: 0;
+            line-height: 1.5;
+        }
+        .footer a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer .social-icons {
+            margin-top: 15px;
+        }
+        .footer .social-icons img {
+            width: 24px;
+            height: 24px;
+            margin: 0 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://eventmanagerscommunity.com/wp-content/uploads/2025/07/cropped-b26a0aba-d5ba-f3c5-fb46-995ad1441349-1.png" alt="Event Managers Community Logo">
+        </div>
+
+        <div class="content">
+            <h1>Event Registration Confirmation</h1>
+
+            <p>Dear **{{name}}**,</p>
+            <p>Thank you for registering for our event! We're excited to confirm that your registration has been successfully processed. We look forward to seeing you there!</p>
+
+            <div class="details-box">
+                <ul>
+                    <li><span class="label">Name:</span> <span class="value">{{name}}</span></li>
+                    <li><span class="label">Email:</span> <span class="value">{{email}}</span></li>
+                    <li><span class="label">Phone:</span> <span class="value">{{phone}}</span></li>
+                    <li><span class="label">Category:</span> <span class="value">{{category}}</span></li>
+                    <li><span class="label">Amount Paid:</span> <span class="value">NGN {{amount}}</span></li>
+                    <li><span class="label">Payment Reference:</span> <span class="value">{{reference}}</span></li>
+                    <li><span class="label">Registration Date:</span> <span class="value">{{registration_date}}</span></li>
+                </ul>
+            </div>
+
+            <p>If you have any questions or require further assistance, please do not hesitate to contact our support team. Kindly reference your **Payment Reference** when reaching out.</p>
+
+            <p>Best regards,<br>**{{from_name}}**</p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 {{from_name}}. All rights reserved.</p>
+            <p style="margin-top: 10px;">
+                <a href="https://eventmanagerscommunity.com/" target="_blank">Visit Our Website</a>
+            </p>
+            </div>
+    </div>
+</body>
+</html>
